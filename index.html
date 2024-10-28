@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+</head>
+<body id="body">
+    
+    <div class="border">
+        <div id="weather"></div>
+    </div>
+
+    <form id="weatherForm">
+        <label for="city"></label><input type="text" id="city" name="City" placeholder="Enter a city name">
+        <input type="Submit" id="submit" value="Submit">
+    </form>
+
+    
+    <script>
+        document.getElementById("weatherForm").addEventListener("submit", function(event) {
+            event.preventDefault(); //prevent form submit
+    
+            //get city name from input field
+            var cityInput = document.getElementById("city").value;
+            console.log("City entered: " + cityInput);
+    
+            //get weather data
+            fetchWeatherData(cityInput);
+        });
+    
+        function fetchWeatherData(city) {
+            const apiKey = '11bcc589da2da36bbbffe7cab9a332ab';
+            const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+    
+            fetch(apiUrl)
+            //.then is a 'promise' - promises can be one of 3 values (pending (result is undefined), fufilled and rejected)
+            .then(response => {
+                //.ok = boolean --> tests if response is true or not
+                    if (!response.ok) {
+                        //if error fetching data, throw error (promise rejected)
+                        throw new Error('Invalid Network Response or possible typo');
+                        //Figure out how to clear form if submit is invalid
+                        document.getElementsByClassName('weatherForm').reset();
+                    }
+                    //promise fufilled
+                    return response.json();
+
+                })
+                //writing data and inserting
+                .then(data => {
+                    //vars declared in response.json
+                    const weatherDiv = document.getElementById('weather');
+                    weatherDiv.innerHTML = `
+                        <div class="weather">
+                                <h1>${data.name}, ${data.sys.country}</h1>
+                                <p>Weather: ${data.weather[0].description}</p>
+                                <p>Temperature: ${data.main.temp} °C</p>
+                                <p>Feels Like: ${data.main.feels_like} °C</p>
+                                <p>Humidity: ${data.main.humidity}%</p>
+                                <p>Avg. Wind Speed: ${data.wind.speed} m/s</p>
+                            
+                        </div>`;
+    
+                    // Call changeBackground after data is available
+                    const weatherCondition = data.weather[0].main.toLowerCase(); //clear, rainy, snow etc.
+                    changeBackground(weatherCondition);
+                })
+                .catch(error => {
+                    const weatherDiv = document.getElementById('weather');
+                    weatherDiv.innerHTML = `<p>Error fetching data: ${error.message}</p>`;
+                });
+        }
+    
+        function changeBackground(condition) {
+            const background = document.getElementById('body');
+            let imageUrl;
+    
+            switch (condition) {
+                case 'clear':
+                    imageUrl = 'Ass/clear.jpg'; //replace with actual image paths
+                    break;
+                case 'clouds':
+                    imageUrl = 'Ass/cloudy.jpg';
+                    break;
+                case 'rain':
+                    imageUrl = 'Ass/rainy.jpg';
+                    break;
+                case 'snow':
+                    imageUrl = 'Ass/snow.jpg';
+                    break;
+                default:
+                    imageUrl = 'Ass/blue.jpg';
+                    break;
+            }
+            background.style.backgroundImage = `url(${imageUrl})`; // Fixed template string usage
+        }
+    </script>
+</body>
+</html>

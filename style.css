@@ -1,0 +1,92 @@
+* {
+  font-family: "Inter", sans-serif;
+  text-align: center;
+  color: rgb(82, 82, 82);
+  background-color: rgb(221, 221, 221);
+  transition: 0.3s;
+  
+}
+
+#weatherForm{
+  padding-top: 250px;
+}
+
+.weather {
+  background-color: rgb(255, 255, 255);
+  opacity: 1;
+  height: 22%;
+  width: 45%;
+  padding: 30px;
+  font-size: 20px;
+  line-height: 0px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 3px solid;
+  border-radius: 10px;
+  box-shadow: 
+  0 1px 1px hsl(0deg 0% 0% / 0.075),
+  0 2px 2px hsl(0deg 0% 0% / 0.075),
+  0 4px 4px hsl(0deg 0% 0% / 0.075),
+  0 8px 8px hsl(0deg 0% 0% / 0.075),
+  0 16px 16px hsl(0deg 0% 0% / 0.075)
+}
+
+.weather p{
+  background-color: rgb(255, 255, 255);
+  padding: 8px;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+
+input{
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding: 10px;
+  border-radius: 15px;
+  border-style: solid;
+}
+
+
+input[type=text]{
+  background-color: rgb(243, 243, 243);
+  transition: 0.3s;
+  font-weight: 800;
+  border-color: rgb(150, 149, 149);
+  box-shadow: 
+  0 1px 1px hsl(0deg 0% 0% / 0.075),
+  0 2px 2px hsl(0deg 0% 0% / 0.075),
+  0 4px 4px hsl(0deg 0% 0% / 0.075),
+  0 8px 8px hsl(0deg 0% 0% / 0.075),
+  0 16px 16px hsl(0deg 0% 0% / 0.075)
+}
+
+input[type=text]:focus{
+  outline: none;
+  translate: 0px 3px;
+}
+
+input[type=submit]{
+  background-color: rgb(243, 243, 243);
+  transition: 0.3s;
+  font-weight: 800;
+  border-color: rgb(150, 149, 149);
+  border-radius: 15px;
+  box-shadow: 
+  0 1px 1px hsl(0deg 0% 0% / 0.075),
+  0 2px 2px hsl(0deg 0% 0% / 0.075),
+  0 4px 4px hsl(0deg 0% 0% / 0.075),
+  0 8px 8px hsl(0deg 0% 0% / 0.075),
+  0 16px 16px hsl(0deg 0% 0% / 0.075)
+}
+
+input[type=submit]:active{
+  translate: 0px 3px;
+  transition: 0.2s;
+}
+
+.weather h1{
+  font-weight: 900;
+}
